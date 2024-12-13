@@ -1,0 +1,23 @@
+{
+  "printer1": {
+    "name": "Printer 1",
+    "status": "idle",
+    "progress": 0,
+    "ip": "192.168.1.100",
+    "api_key": ""
+  },
+  "printer2": {
+    "name": "Printer 2",
+    "status": "printing",
+    "progress": 45,
+    "ip": "192.168.1.101",
+    "api_key": ""
+  },
+  "printer3": {
+    "name": "Printer 3",
+    "status": "offline",
+    "progress": 0,
+    "ip": "192.168.1.102",
+    "api_key": ""
+  }
+}

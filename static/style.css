@@ -1,0 +1,167 @@
+:root {
+    --bg-dark: #0a0a0a;
+    --card-bg: rgba(25, 25, 25, 0.8);
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --neon-blue: #00f2ff;
+    --neon-purple: #8c00ff;
+    --neon-pink: #ff00c8;
+    --status-printing: #00f2ff;
+    --status-idle: #ff00c8;
+    --status-offline: #ff0000;
+}
+
+body.dark-theme {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.text-gradient {
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(0, 242, 255, 0.2);
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-weight: bold;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.status-printing {
+    color: var(--status-printing);
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+.status-idle {
+    color: var(--status-idle);
+    text-shadow: 0 0 10px rgba(255, 0, 200, 0.5);
+}
+
+.status-offline {
+    color: var(--status-offline);
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.custom-progress {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+.btn-neon {
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    border: none;
+    color: white;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.btn-danger-neon {
+    background: linear-gradient(45deg, #ff0000, var(--neon-pink));
+    border: none;
+    color: white;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.btn-info-neon {
+    background: linear-gradient(45deg, var(--neon-blue), #00ffaa);
+    border: none;
+    color: white;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3);
+    color: white;
+}
+
+/* Modal Styles */
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.glass-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+    color: var(--text-primary);
+}
+
+.printer-list-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.printer-list-item:hover {
+    transform: translateX(5px);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+}
+
+/* Form Labels */
+label {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Modal Animations */
+.modal.fade .modal-dialog {
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1);
+}
+
+/* Animation for gradient text */
+@keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
