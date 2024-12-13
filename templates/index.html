@@ -67,6 +67,7 @@
                             <select class="form-control glass-input" name="type" id="printerType" required>
                                 <option value="octoprint">OctoPrint</option>
                                 <option value="bambulab">BambuLab</option>
+                                <option value="klipper">Klipper</option>
                             </select>
                         </div>
                         <div class="row">
@@ -85,6 +86,18 @@
                             <div class="col-md-4 octoprint-field">
                                 <div class="form-group">
                                     <label>API Key (OctoPrint)</label>
+                                    <input type="password" class="form-control glass-input" name="api_key">
+                                </div>
+                            </div>
+                            <div class="col-md-4 klipper-field" style="display: none;">
+                                <div class="form-group">
+                                    <label>Port (default: 7125)</label>
+                                    <input type="text" class="form-control glass-input" name="port" value="7125">
+                                </div>
+                            </div>
+                            <div class="col-md-4 klipper-field" style="display: none;">
+                                <div class="form-group">
+                                    <label>API Key (Klipper)</label>
                                     <input type="password" class="form-control glass-input" name="api_key">
                                 </div>
                             </div>
@@ -134,6 +147,7 @@
                             <select class="form-control glass-input" name="type" id="editPrinterType" required>
                                 <option value="octoprint">OctoPrint</option>
                                 <option value="bambulab">BambuLab</option>
+                                <option value="klipper">Klipper</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
@@ -146,6 +160,14 @@
                         </div>
                         <div class="form-group mb-3 edit-octoprint-field">
                             <label>API Key (OctoPrint)</label>
+                            <input type="password" class="form-control glass-input" name="api_key">
+                        </div>
+                        <div class="form-group mb-3 edit-klipper-field" style="display: none;">
+                            <label>Port (default: 7125)</label>
+                            <input type="text" class="form-control glass-input" name="port" value="7125">
+                        </div>
+                        <div class="form-group mb-3 edit-klipper-field" style="display: none;">
+                            <label>API Key (Klipper)</label>
                             <input type="password" class="form-control glass-input" name="api_key">
                         </div>
                         <div class="form-group mb-3 edit-bambulab-field" style="display: none;">

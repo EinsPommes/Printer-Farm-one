@@ -6,29 +6,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle printer type selection
     document.getElementById('printerType').addEventListener('change', function() {
-        const isBambuLab = this.value === 'bambulab';
-        document.querySelectorAll('.bambulab-field').forEach(el => {
-            el.style.display = isBambuLab ? 'block' : 'none';
+        const selectedType = this.value;
+        // Hide all fields first
+        document.querySelectorAll('.bambulab-field, .octoprint-field, .klipper-field').forEach(el => {
+            el.style.display = 'none';
             el.querySelectorAll('input').forEach(input => {
-                input.required = isBambuLab;
+                input.required = false;
             });
         });
-        document.querySelectorAll('.octoprint-field').forEach(el => {
-            el.style.display = isBambuLab ? 'none' : 'block';
-        });
+
+        // Show fields based on selected type
+        if (selectedType === 'bambulab') {
+            document.querySelectorAll('.bambulab-field').forEach(el => {
+                el.style.display = 'block';
+                el.querySelectorAll('input').forEach(input => {
+                    input.required = true;
+                });
+            });
+        } else if (selectedType === 'klipper') {
+            document.querySelectorAll('.klipper-field').forEach(el => {
+                el.style.display = 'block';
+            });
+        } else { // octoprint
+            document.querySelectorAll('.octoprint-field').forEach(el => {
+                el.style.display = 'block';
+            });
+        }
     });
 
     document.getElementById('editPrinterType').addEventListener('change', function() {
-        const isBambuLab = this.value === 'bambulab';
-        document.querySelectorAll('.edit-bambulab-field').forEach(el => {
-            el.style.display = isBambuLab ? 'block' : 'none';
+        const selectedType = this.value;
+        // Hide all fields first
+        document.querySelectorAll('.edit-bambulab-field, .edit-octoprint-field, .edit-klipper-field').forEach(el => {
+            el.style.display = 'none';
             el.querySelectorAll('input').forEach(input => {
-                input.required = isBambuLab;
+                input.required = false;
             });
         });
-        document.querySelectorAll('.edit-octoprint-field').forEach(el => {
-            el.style.display = isBambuLab ? 'none' : 'block';
-        });
+
+        // Show fields based on selected type
+        if (selectedType === 'bambulab') {
+            document.querySelectorAll('.edit-bambulab-field').forEach(el => {
+                el.style.display = 'block';
+                el.querySelectorAll('input').forEach(input => {
+                    input.required = true;
+                });
+            });
+        } else if (selectedType === 'klipper') {
+            document.querySelectorAll('.edit-klipper-field').forEach(el => {
+                el.style.display = 'block';
+            });
+        } else { // octoprint
+            document.querySelectorAll('.edit-octoprint-field').forEach(el => {
+                el.style.display = 'block';
+            });
+        }
     });
 
     // Load printer list in settings
@@ -46,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="mb-1">${printer.name}</h6>
-                                <small class="text-muted">${printer.type} - ${printer.ip}</small>
+                                <small class="text-muted">${printer.type} - ${printer.ip}${printer.type === 'klipper' ? ':' + printer.port : ''}</small>
                             </div>
                             <button class="btn btn-sm btn-neon edit-printer" data-printer-id="${id}">
                                 <i class="fas fa-edit"></i>
@@ -71,6 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (formData.get('type') === 'bambulab') {
             printerData.serial = formData.get('serial');
             printerData.access_code = formData.get('access_code');
+        } else if (formData.get('type') === 'klipper') {
+            printerData.port = formData.get('port') || '7125';
+            printerData.api_key = formData.get('api_key');
         } else {
             printerData.api_key = formData.get('api_key');
         }
@@ -110,6 +145,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (printer.type === 'bambulab') {
                         form.querySelector('[name="serial"]').value = printer.serial || '';
                         form.querySelector('[name="access_code"]').value = printer.access_code || '';
+                    } else if (printer.type === 'klipper') {
+                        form.querySelector('[name="port"]').value = printer.port || '7125';
+                        form.querySelector('[name="api_key"]').value = printer.api_key || '';
                     } else {
                         form.querySelector('[name="api_key"]').value = printer.api_key || '';
                     }
@@ -133,6 +171,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (formData.get('type') === 'bambulab') {
             printerData.serial = formData.get('serial');
             printerData.access_code = formData.get('access_code');
+        } else if (formData.get('type') === 'klipper') {
+            printerData.port = formData.get('port') || '7125';
+            printerData.api_key = formData.get('api_key');
         } else {
             printerData.api_key = formData.get('api_key');
         }

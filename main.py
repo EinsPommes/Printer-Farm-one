@@ -39,6 +39,15 @@ if not printers_file.exists():
             "api_key": "",
             "serial": "BBLP1234567",
             "access_code": ""
+        },
+        "printer3": {
+            "name": "Klipper Ender 3",
+            "type": "klipper",
+            "status": "idle",
+            "progress": 0,
+            "ip": "192.168.1.102",
+            "port": "7125",
+            "api_key": ""
         }
     }
     printers_file.write_text(json.dumps(default_printers, indent=2))
@@ -63,6 +72,13 @@ class BambuPrinter(BaseModel):
     access_code: Optional[str] = ""
     api_key: Optional[str] = ""
 
+class KlipperPrinter(BaseModel):
+    name: str
+    type: Literal["klipper"]
+    ip: str
+    port: str = "7125"
+    api_key: Optional[str] = ""
+
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse(
@@ -80,7 +96,7 @@ async def get_printer(printer_id: str):
     return printers.get(printer_id, {"error": "Printer not found"})
 
 @app.post("/api/printers")
-async def add_printer(printer: OctoPrinter | BambuPrinter):
+async def add_printer(printer: OctoPrinter | BambuPrinter | KlipperPrinter):
     printers = load_printers()
     printer_id = f"printer{len(printers) + 1}"
     
@@ -104,7 +120,7 @@ async def delete_printer(printer_id: str):
     return {"message": "Printer deleted"}
 
 @app.put("/api/printers/{printer_id}")
-async def update_printer(printer_id: str, printer: OctoPrinter | BambuPrinter):
+async def update_printer(printer_id: str, printer: OctoPrinter | BambuPrinter | KlipperPrinter):
     printers = load_printers()
     if printer_id not in printers:
         raise HTTPException(status_code=404, detail="Printer not found")
